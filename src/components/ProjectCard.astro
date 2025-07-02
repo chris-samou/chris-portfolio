@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+
 interface Props {
   title: string;
   description: string;
@@ -21,11 +22,11 @@ const {
 ---
 
 <article
-  class="relative bg-background border border-muted/50 rounded-lg shadow-sm overflow-hidden h-full flex flex-col group hover:border-primary/50 hover:shadow-lg transition-all duration-300"
+  class="relative bg-background border border-muted/50 rounded-lg shadow-sm overflow-hidden h-[400px] w-full flex flex-col group"
   aria-label={`Project card: ${title}`}
 >
   <span
-    class={`absolute top-4 right-4 px-2 py-0.5 rounded-full text-xs font-semibold select-none ${
+    class={`absolute top-4 right-4 px-2 py-0.5 rounded-full text-xs font-semibold select-none z-20 ${
       type === "work"
         ? "bg-blue-100 text-blue-800"
         : "bg-green-100 text-green-800"
@@ -35,11 +36,11 @@ const {
     {type === "work" ? "Work" : "Personal"}
   </span>
 
-  <a
-    href={liveUrl ?? repoUrl}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="block overflow-hidden"
+  <div
+    role="button"
+    tabindex="0"
+    class="relative h-full overflow-hidden rounded-t-lg cursor-pointer"
+    data-overlay-toggle
     aria-label={liveUrl
       ? `View live project: ${title}`
       : `View code repository: ${title}`}
@@ -47,31 +48,41 @@ const {
     <img
       src={image}
       alt={`Screenshot of ${title}`}
-      class="w-full h-fit object-contain group-hover:scale-105 transition-transform duration-300 ease-in-out"
+      class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
       loading="lazy"
       decoding="async"
       fetchpriority="low"
     />
-  </a>
+    <div class="absolute bottom-0 bg-background/80 p-4 w-full">
+      <h3 class="text-lg font-semibold text-foreground">{title}</h3>
+    </div>
+  </div>
 
-  <div class="p-6 flex flex-col flex-grow">
-    <h3 class="text-xl font-bold mb-2 text-foreground">{title}</h3>
-    <p class="text-muted-foreground mb-4 flex-grow">{description}</p>
-    <div class="flex flex-wrap gap-2 mb-4">
-      {
-        tags.map((tag) => (
-          <span
-            class="text-xs font-semibold bg-primary/10 text-primary px-2 py-1 rounded-full select-none"
-            aria-label={`Tag: ${tag}`}
-          >
-            {tag}
-          </span>
-        ))
-      }
+  <div
+    class="absolute inset-0 bg-background/90 backdrop-blur-sm flex flex-col max-md:pt-12 p-6 transition-opacity duration-300 z-10
+  pointer-events-auto opacity-100 md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto"
+    data-overlay
+  >
+    <div class="flex-grow overflow-auto">
+      <h3 class="text-xl font-bold mb-2 text-foreground">{title}</h3>
+      <p class="text-muted-foreground mb-4">{description}</p>
+
+      <div class="flex flex-wrap gap-2 mb-4">
+        {
+          tags.map((tag) => (
+            <span
+              class="text-xs font-semibold bg-primary/10 text-primary px-2 py-1 rounded-full select-none"
+              aria-label={`Tag: ${tag}`}
+            >
+              {tag}
+            </span>
+          ))
+        }
+      </div>
     </div>
 
     <div
-      class="mt-auto flex justify-end items-center gap-6 pt-4 border-t border-muted/50 text-sm font-medium"
+      class="flex-shrink-0 flex justify-end items-center gap-6 pt-4 border-t border-muted/50 text-sm font-medium"
     >
       {
         liveUrl && (
@@ -80,6 +91,7 @@ const {
             target="_blank"
             rel="noopener noreferrer"
             class="group flex items-center gap-2 relative text-muted-foreground hover:text-primary cursor-pointer"
+            aria-label={`View live project: ${title}`}
           >
             <span class="relative">
               View Project
@@ -103,6 +115,7 @@ const {
             target="_blank"
             rel="noopener noreferrer"
             class="group flex items-center gap-2 relative text-muted-foreground hover:text-primary cursor-pointer"
+            aria-label={`View code repository: ${title}`}
           >
             <span class="relative">
               View Code
@@ -119,5 +132,42 @@ const {
         )
       }
     </div>
+    <button
+      type="button"
+      class="absolute top-4 right-4 text-muted-foreground hover:text-primary text-sm font-medium z-20 block md:hidden"
+      data-overlay-close
+    >
+      Close
+    </button>
   </div>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const isTouchDevice = window.matchMedia("(hover: none)").matches;
+    const cards = document.querySelectorAll("[data-overlay-toggle]");
+
+    cards.forEach((card) => {
+      const overlay = card.parentElement?.querySelector("[data-overlay]");
+      const closeBtn = card.parentElement?.querySelector(
+        "[data-overlay-close]",
+      );
+
+      if (isTouchDevice) {
+        card.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (overlay) {
+            overlay.classList.add("opacity-100", "pointer-events-auto");
+          }
+        });
+
+        if (closeBtn) {
+          closeBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            overlay?.classList.remove("opacity-100", "pointer-events-auto");
+          });
+        }
+      }
+    });
+  });
+</script>
