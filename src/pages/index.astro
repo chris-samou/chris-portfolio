@@ -26,7 +26,9 @@ const skills: { name: string; icon: IconName }[] = [
   <section id="about" class="py-12 md:py-18">
     <div class="max-w-4xl">
       <div class="hero-line overflow-hidden">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter">
+        <h1
+          class="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter"
+        >
           Hi, I'm <span class="text-primary">Chris</span><br />
           A Frontend developer
         </h1>
@@ -65,11 +67,19 @@ const skills: { name: string; icon: IconName }[] = [
   <section id="skills" class="py-16">
     <div class="skills-title-wrapper overflow-hidden">
       <h3 class="text-3xl font-bold mb-12 text-center skills-title">
-        Core Technologies I Use
+        Core Technologies<br class="md:hidden" /> I Use
       </h3>
     </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-8">
-      {skills.map((skill) => <SkillIcon name={skill.name} icon={skill.icon} />)}
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+    >
+      {
+        skills.map((skill) => (
+          <div class="skill-card will-change-transform">
+            <SkillIcon name={skill.name} icon={skill.icon} />
+          </div>
+        ))
+      }
     </div>
   </section>
 
@@ -79,6 +89,7 @@ const skills: { name: string; icon: IconName }[] = [
     gsap.registerPlugin(ScrollTrigger);
 
     function initAnimations() {
+      // Hero text animation (plays once on load)
       const heroTimeline = gsap.timeline({ delay: 0.2 });
       heroTimeline
         .from(".hero-line h1", {
@@ -99,25 +110,37 @@ const skills: { name: string; icon: IconName }[] = [
         .from(
           ".hero-line a",
           {
-            opacity: 100,
+            opacity: 0,
+            y: 20,
             duration: 0.6,
             ease: "power3.out",
           },
           "-=0.6",
         );
 
+      // Skills section title animation
       gsap.from(".skills-title", {
-        scrollTrigger: { trigger: ".skills-title-wrapper" },
-        yPercent: 100,
+        scrollTrigger: {
+          trigger: ".skills-title-wrapper",
+          start: "top 85%", // more mobile-friendly
+          toggleActions: "play none none none",
+        },
+        y: 50,
+        opacity: 0,
         duration: 0.8,
         ease: "power3.out",
       });
 
+      // Skills cards animation
       gsap.from(".skill-card", {
-        scrollTrigger: { trigger: "#skills", start: "top 80%" },
+        scrollTrigger: {
+          trigger: "#skills",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
         opacity: 0,
         y: 30,
-        stagger: 0.05,
+        stagger: 0.1,
         duration: 0.6,
         ease: "power2.out",
       });
