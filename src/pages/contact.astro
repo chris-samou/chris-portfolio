@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<Layout title="Contact | Your Name">
+  <section class="py-20 md:py-28">
+    <div class="text-center max-w-2xl mx-auto">
+      <div style="overflow: hidden;">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold tracking-tighter"
+          transition:name="page-title"
+        >
+          Let's Connect
+        </h1>
+      </div>
+      <div style="overflow: hidden;">
+        <p class="mt-4 text-lg md:text-xl text-muted-foreground">
+          Have a project in mind or just want to say hello? I'd love to hear
+          from you.
+        </p>
+      </div>
+
+      <div class="mt-12">
+        <a
+          href="mailto:samourelisxr@gmail.com"
+          class="inline-flex items-center gap-3 text-lg font-semibold bg-primary text-primary-foreground px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
+        >
+          <Icon name="mail" class="w-5 h-5" />
+          <span>samourelisxr@gmail.com</span>
+        </a>
+      </div>
+
+      <div class="mt-16 text-center">
+        <p class="text-muted-foreground mb-4">Find me on other platforms:</p>
+        <div class="flex gap-6 justify-center">
+          <a
+            href="https://github.com/chris-samou"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Icon name="github_light" class="w-8 h-8" />
+          </a>
+          <a
+            href="https://linkedin.com/in/csamourelis"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Icon name="linkedin" class="w-8 h-8" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Add a simple reveal animation
+    import gsap from "gsap";
+    function initAnimations() {
+      gsap.from("h1, p", {
+        delay: 0.1,
+        yPercent: 100,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+      gsap.from(".mt-12, .mt-16", {
+        delay: 0.5,
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    }
+    initAnimations();
+  </script>
+</Layout>

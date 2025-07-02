@@ -1,47 +1,43 @@
-# Astro Starter Kit: Minimal
+# Christos Samourelis - Personal Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Welcome! This repository contains the source code for my personal portfolio, a place to showcase my projects, skills, and professional journey. This site was built from the ground up with a strong focus on performance, modern development practices, and a clean, user-centric design.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## About This Project
 
-## 🚀 Project Structure
+The goal of this portfolio is to serve as a dynamic, engaging, and fast digital resume. It's not just a list of my work, but a demonstration of my ability to build high-quality web experiences. Every component, animation, and design choice was made deliberately to reflect the kind of work I am passionate about.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Tech Stack & Philosophy
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+This project was built using a modern, performance-oriented tech stack, reflecting best practices for 2025.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- **Framework:** **[Astro](https://astro.build/)**
+  - Chosen for its incredible performance (zero-JS by default) and content-focused architecture. It ensures the site is lightning-fast and SEO-friendly.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **Styling:** **[Tailwind CSS](https://tailwindcss.com/)**
+  - Used for its utility-first approach, which allows for rapid development and a highly consistent, maintainable design system.
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **Animations:** **[GSAP (GreenSock Animation Platform)](https://gsap.com/)**
+  - Implemented for smooth, performant, and timeline-based animations that add a layer of professional polish without compromising on speed.
 
-## 🧞 Commands
+- **Development Philosophy**
+  - **Performance First:** Optimized for fast load times and a smooth user experience.
+  - **Responsive Design:** Fully responsive and accessible on all devices, from mobile phones to desktops.
+  - **Clean Code:** Written with maintainability and scalability in mind.
 
-All commands are run from the root of the project, from a terminal:
+## Key Features
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- **Dark-Mode Only Design:** A sleek, focused, and consistent visual aesthetic.
+- **Meaningful Animations:** Subtle animations on page load and scroll provide a fluid and engaging experience.
+- **Interactive Skill Showcase:** My tech stack is presented with interactive hover effects to add a touch of "pizzazz."
+- **File-Based Icon System:** A scalable and maintainable SVG icon system, demonstrating clean project architecture.
+- **Astro View Transitions:** Seamless, app-like page transitions for a smoother navigation experience.
 
-## 👀 Want to learn more?
+## Let's Connect
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+I'm currently seeking new opportunities and am always open to discussing exciting projects. Feel free to reach out!
+
+- **Email:** samourelisxr@gmail.com
+- **LinkedIn:** https://linkedin.com/in/csamourelis
+- **GitHub:** You're already here!

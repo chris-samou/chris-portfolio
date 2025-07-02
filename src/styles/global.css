@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Font families */
+  --font-family-sans: "Inter Variable", sans-serif;
+
+  /* Custom colors using CSS variables */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+}
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --primary: 242.1 85.3% 72.9%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: "Inter Variable", sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(
+        at 20% 20%,
+        hsla(var(--primary) / 0.15) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 80% 80%,
+        hsla(var(--primary) / 0.1) 0px,
+        transparent 50%
+      );
+    transition:
+      background-color 0.3s ease-out,
+      color 0.3s ease-out;
+  }
+}

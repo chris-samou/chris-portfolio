@@ -1,0 +1,26 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "./Icon.astro";
+
+interface Props {
+  name: string;
+  icon: IconName;
+}
+const { name, icon } = Astro.props;
+---
+
+<div
+  class="group flex flex-col items-center justify-center gap-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+>
+  <div class="w-16 h-16 flex items-center justify-center">
+    <Icon
+      name={icon}
+      class="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
+    />
+  </div>
+  <p
+    class="text-sm font-medium text-gray-600 dark:text-gray-300 md:opacity-0 transform translate-y-2 md:group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+  >
+    {name}
+  </p>
+</div>

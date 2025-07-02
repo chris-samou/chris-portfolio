@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = [
+  {
+    title: "ARAM Builds App",
+    description:
+      "A League of Legends companion app to browse and manage ARAM builds efficiently. Features include search, filtering by champion, and a clean UI optimized for game fans.",
+    image: "/projects/aram-builds.webp",
+    tags: ["Svelte", "TypeScript", "TailwindCSS", "RestAPI"],
+    liveUrl: "https://aram-builds.netlify.app/",
+    repoUrl: "https://github.com/chris-samou/aram-builds-app",
+    type: "",
+  },
+  {
+    title: "Snake Game",
+    description:
+      "A classic snake game rebuilt with JavaScript for fun and practice. Includes a scoring system, self-collision detection, and increasing difficulty.",
+    image: "/projects/snake-game.webp",
+    tags: ["JavaScript", "HTML", "CSS"],
+    liveUrl: "https://nostalgia-snake.netlify.app/",
+    repoUrl: "https://github.com/chris-samou/snake-project-js",
+    type: "",
+  },
+  {
+    title: "Good Vibes Dashboard",
+    description:
+      "A visually engaging dashboard displaying quotes, weather info, and a motivational vibe. Built as a creative experiment to enhance UI/UX and fetch external APIs.",
+    image: "/projects/good-vibes.webp",
+    tags: ["Angular", "TypeScript", "TailwindCSS", "RestAPI"],
+    liveUrl: "https://good-vibes-dashboard.netlify.app/",
+    repoUrl: "https://github.com/chris-samou/Good-vibes-dashboard",
+    type: "",
+  },
+  {
+    title: "Wickes Garden Calendar",
+    description:
+      "A seasonal garden planner that helps users know what to plant and when. Built at iSite during my time there, I contributed significantly to front-end development, UI logic, and responsive behavior.",
+    image: "/projects/wickes-calendar.webp",
+    tags: ["Angular", "TypeScript", "SCSS"],
+    liveUrl: "https://www.wickes.co.uk/garden-calendar",
+    repoUrl: "",
+    type: "work",
+  },
+];
+---
+
+<Layout title="Projects | Chris Samourelis">
+  <section class="py-20 max-w-6xl mx-auto px-4 md:px-8">
+    <header style="overflow: hidden;">
+      <h1 class="text-4xl font-extrabold tracking-tight mb-4">My Projects</h1>
+      <p class="text-lg text-muted-foreground mb-12 max-w-3xl">
+        A curated list of personal and professional work where I focused on
+        clean code, usability, and performance.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list">
+      {
+        projects.map((project) => (
+          <div class="project-item" role="listitem">
+            <ProjectCard {...project} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <script type="module">
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initAnimations() {
+      gsap.from("h1, p", {
+        delay: 0.2,
+        yPercent: 100,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      gsap.from(".project-item", {
+        scrollTrigger: { trigger: ".project-item", start: "top 85%" },
+        opacity: 0,
+        y: 50,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    }
+
+    function cleanup() {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
+
+    initAnimations();
+    document.addEventListener("astro:before-swap", cleanup);
+  </script>
+</Layout>

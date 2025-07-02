@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro";
+
+const socialLinks: {
+  href: string;
+  label: string;
+  icon: "github_light" | "linkedin" | "mail";
+}[] = [
+  {
+    href: "https://github.com/chris-samou",
+    label: "GitHub",
+    icon: "github_light",
+  },
+  {
+    href: "https://linkedin.com/in/csamourelis",
+    label: "LinkedIn",
+    icon: "linkedin",
+  },
+  { href: "mailto:samourelisxr@gmail.com", label: "Email", icon: "mail" },
+];
+---
+
+<footer class="mt-24 py-8 border-t border-muted">
+  <div
+    class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4"
+  >
+    <p class="text-sm text-muted-foreground">
+      © {new Date().getFullYear()} Christos Samourelis. All rights reserved.
+    </p>
+    <div class="flex gap-4">
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.href}
+            aria-label={link.label}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-primary transition-all transform hover:scale-110"
+          >
+            <Icon name={link.icon} class="size-10 object-contain" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>
